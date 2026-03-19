@@ -53,4 +53,15 @@ const checkAndTriggerClaims = async (req, res) => {
   }
 };
 
-module.exports = { checkAndTriggerClaims };
+// @desc    Get all claims (Insurance Agent view)
+// @route   GET /api/claims/all
+const getAllClaims = async (req, res) => {
+  try {
+    const claims = await Claim.find().populate("userId", "name zone");
+    res.json(claims);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { checkAndTriggerClaims, getAllClaims };
