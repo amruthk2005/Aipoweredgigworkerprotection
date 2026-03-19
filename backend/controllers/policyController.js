@@ -1,6 +1,6 @@
 const Policy = require("../models/Policy");
 const User = require("../models/User");
-const { calculatePremium } = require("../services/riskService");
+const { calculateRiskForWorker, calculatePremium } = require("../services/riskService");
 
 // @desc    Dynamic Weekly Premium Calculation & Policy Creation
 // @route   POST /api/policies/create
@@ -9,8 +9,9 @@ const createPolicy = async (req, res) => {
     const { userId } = req.body;
     const user = await User.findById(userId);
 
-    // AI logic for dynamic premium
-    const premium = calculatePremium(user.riskScore);
+    // AI logic for predictive risk and dynamic premium
+    const currentRiskScore = calculateRiskForWorker(user.zone); 
+    const premium = calculatePremium(currentRiskScore);
 
     const policy = await Policy.create({
       userId,
