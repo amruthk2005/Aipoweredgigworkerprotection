@@ -28,4 +28,15 @@ const createPolicy = async (req, res) => {
   }
 };
 
-module.exports = { createPolicy };
+// @desc    Get all policies (Insurance Agent view)
+// @route   GET /api/policies/all
+const getAllPolicies = async (req, res) => {
+  try {
+    const policies = await Policy.find().populate("userId", "name zone");
+    res.json(policies);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { createPolicy, getAllPolicies };
