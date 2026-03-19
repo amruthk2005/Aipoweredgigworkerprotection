@@ -64,4 +64,15 @@ const getAllClaims = async (req, res) => {
   }
 };
 
-module.exports = { checkAndTriggerClaims, getAllClaims };
+// @desc    Get claims for a specific user
+// @route   GET /api/claims/user/:userId
+const getUserClaims = async (req, res) => {
+  try {
+    const claims = await Claim.find({ userId: req.params.userId });
+    res.json(claims);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { checkAndTriggerClaims, getAllClaims, getUserClaims };

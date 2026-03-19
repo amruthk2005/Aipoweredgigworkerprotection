@@ -29,7 +29,7 @@ const Login = () => {
             if (data.role === 'agent') {
                 navigate('/agent-dashboard'); 
             } else {
-                navigate('/');
+                navigate('/dashboard');
             }
         } catch (err) {
             setError(err.response?.data?.message || 'Access Denied: Invalid Credentials');

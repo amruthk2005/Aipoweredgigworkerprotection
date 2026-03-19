@@ -1,10 +1,11 @@
 const express = require("express");
-const { checkAndTriggerClaims, getAllClaims } = require("../controllers/claimController");
+const { checkAndTriggerClaims, getAllClaims, getUserClaims } = require("../controllers/claimController");
 
 const router = express.Router();
 
-// Real-time Parametric Trigger Monitor
+// Claim Routes
 router.get("/trigger", checkAndTriggerClaims);
 router.get("/all", getAllClaims);
+router.get("/user/:userId", getUserClaims);
 
 module.exports = router;

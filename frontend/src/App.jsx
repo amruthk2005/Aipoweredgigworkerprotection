@@ -7,6 +7,7 @@ import './App.css';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import AgentDashboard from './pages/AgentDashboard';
+import PartnerDashboard from './pages/PartnerDashboard';
 
 function LandingPage() {
   const [simulationActive, setSimulationActive] = useState(false);
@@ -47,6 +48,7 @@ function LandingPage() {
           {user ? (
             <>
               <span style={{color: 'var(--primary-light)', fontWeight: 600}}>Welcome, {user.name}</span>
+              <a href={user.role === 'agent' ? '/agent-dashboard' : '/dashboard'}>My Shield</a>
               <a href="#my-claims">My Claims</a>
               <button onClick={handleLogout} className="btn btn-glass" style={{marginLeft: '1rem'}}>Log Out</button>
             </>
@@ -136,6 +138,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/agent-dashboard" element={<AgentDashboard />} />
+        <Route path="/dashboard" element={<PartnerDashboard />} />
       </Routes>
     </Router>
   );

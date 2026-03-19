@@ -39,4 +39,15 @@ const getAllPolicies = async (req, res) => {
   }
 };
 
-module.exports = { createPolicy, getAllPolicies };
+// @desc    Get policies for a specific user
+// @route   GET /api/policies/user/:userId
+const getUserPolicies = async (req, res) => {
+  try {
+    const policies = await Policy.find({ userId: req.params.userId });
+    res.json(policies);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { createPolicy, getAllPolicies, getUserPolicies };
